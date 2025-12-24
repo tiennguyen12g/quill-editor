@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+$mobile-width: 'only screen and (max-width:599px)';
+$mobile-horizontal-tablet-vertical: '(max-width:699px) and (orientation:landscape)';
+$tablet-width: 'screen and (min-width:600px) and (max-width: 1024px)';
+$desktop-width: 'screen and (min-width: 1025px)';
+@mixin respone($breakpoint) {
+    @if $breakpoint == mobile {
+        @media #{$mobile-width}{
+            @content;
+        }
+    }
+    @if $breakpoint == mobile-tablet{
+        @media #{$mobile-horizontal-tablet-vertical}{
+            @content;
+        }
+    }
+    @if $breakpoint == tablet {
+        @media #{$tablet-width}{
+            @content;
+        }
+    }
+    @if $breakpoint == desktop {
+        @media #{$desktop-width}{
+            @content;
+        }
+    }      
+}
+:root{
+    --light-background:rgb(245, 245, 245);
+    --light-element:rgb(255,255,255);
+    --light-shadow:rgb(225, 225, 225);
+    --light-hover:rgb(221, 220, 220);
+    --light-color:rgb(0, 0, 0);
+
+    --light-button:rgb(255,255,255);
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;  
+}
+html{
+    font-size: 18px;
+    background-color: var(--light-background);
+}
+body{
+    font-family: 'Nunito Sans', sans-serif;
+    // overflow: auto;
+    // scroll-behavior: auto;
+    text-rendering: optimizeLegibility;
+    line-height: normal;
+    background-color: var(--light-background);
+
+}
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px; /* Set the width for vertical scrollbar */
+    height: 8px; /* Set the height for horizontal scrollbar */
+}
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .15);
+}
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+// ::-webkit-scrollbar {
+//     display: none;
+//   }
+a{
+    text-decoration: none;
+    color: var(--light-color);
+}
+a[disabled]{
+    pointer-events: none;
+    background-color: rgb(233, 233, 233);
+}
+@include respone(mobile){
+    body{
+        background-color: var(--light-background);
+    }
+
+}
+    

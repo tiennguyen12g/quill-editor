@@ -1,0 +1,7 @@
+<svg width="23" height="23" viewBox="0 0 23 23">
+    <!-- Black left half -->
+    <rect x="0" y="0" width="11.5" height="23" fill="#000000" />
+    <!-- White right half -->
+    <rect x="11.5" y="0" width="11.5" height="23" fill="#FFFFFF" />
+  </svg>
+  

@@ -1,0 +1,198 @@
+.wrap-create-article{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    .container-create-article{
+        width: 100%;
+        max-width: 1000px;
+        // overflow: auto;
+    }
+    @media (min-width: 1000px){
+        top: 0px;
+    }
+
+    @media (max-width: 999px){
+        top: 60px;
+    }
+    h4{
+        font-weight: 500;
+    }
+}
+.add-title{
+    margin: 10px 0;
+    .title-filter{
+        width: 100%;
+        height: fit-content;
+        margin-top: 10px;
+        @media (min-width: 500px){
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 499px){
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            // justify-content: center;
+        }
+    }
+    .input-title{
+        // width: 100%;
+        height: 32px;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        box-shadow: 0 0 0 1px gainsboro;
+        padding: 0px 10px;
+        font-size: 18px;        
+        @media (min-width: 500px){
+            flex: 1;
+        }
+        @media (max-width: 499px){
+            width: 100%;
+        }
+    }
+}
+.add-tags{
+    .add-tags-input{
+        display: flex;
+        justify-content: center;
+        .input-title{
+            height: 32px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            box-shadow: 0 0 0 1px gainsboro;
+            padding: 0 10px;
+            font-size: 14px;
+            margin: 10px 10px 5px 0;
+            // @media (min-width: 500px){
+            //     width: 100%;
+            // }
+            // @media (max-width: 499px){
+            //     width: 100%;
+            // }
+            flex: 1;
+        }
+        .add-tags-btn{
+            width: fit-content;
+            height: 32px;
+            padding: 0 10px;
+            background-color: green;
+            border-radius: 10px;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    }
+    .list-tags{
+        display: flex;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        .tag-btn{
+            // color: white;
+            display: flex;
+            font-size: 14px;
+            border-radius: 8px;
+            background-color: gainsboro;
+            padding: 5px 8px;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            margin: 0px 8px 5px 0;
+            .span-tag{
+                margin-right: 5px;
+            }
+            .span-remove{
+                cursor: pointer;
+            }
+        }
+    }
+}
+.add-body{
+    width: 100%;
+    height: fit-content;
+    // min-height: 300px;
+    border-radius: 10px;
+    border: 1px solid gainsboro;
+    // overflow: hidden;
+    .box-toolbar{
+        display: flex;
+        // border-bottom: 2px solid gainsboro;
+        
+        .write-btn{
+
+            cursor: pointer;
+        }
+        .preview-btn{
+            cursor: pointer;
+            // border-bottom: 2px solid rgb(218, 14, 14);
+            // margin-top: 2px;
+        }
+    }
+}
+.write-active{
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-right: 1px solid gainsboro;
+}
+.preview-active{
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-right: 1px solid gainsboro;
+    border-left: 1px solid gainsboro;
+}
+.document-preview{
+    width: 100%;
+    background-color: white;
+    min-height: 200px;
+    max-height: fit-content;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid gainsboro;
+    margin-top: -1px;
+
+}
+.post-article{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    cursor: pointer;
+    button{
+        background-color: rgb(25, 147, 25);
+        color: white;
+        padding: 5px 10px;
+        width: fit-content;
+        cursor: pointer;
+        border-radius: 10px ;
+    }
+}
+.container-preview{
+    padding: 20px;
+    height: auto;
+}
+.save-notify{
+    position: absolute;
+    top: 25vh;
+    width: 300px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid transparent;
+    box-shadow: -2px -2px 2px 2px rgb(72, 134, 214);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .ok-btn{
+        background-color: rgb(72, 134, 214);
+        color: white;
+        margin-top: 10px;
+    }
+}

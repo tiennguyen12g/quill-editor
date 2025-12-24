@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "esModuleInterop": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": false,  // Disabled to allow unused imports/variables
+    "noUnusedParameters": false,  // Disabled to allow unused function parameters
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": [
+    "node_modules", 
+    "build", 
+    "dist",
+    "src/Router.tsx",  // Exclude Router (not part of package)
+    "src/main.tsx",    // Exclude main entry (not part of package)
+    "src/Test.tsx",    // Exclude Test (not part of package)
+    "src/examples/**/*",  // Exclude examples (not part of package)
+    "src/Pages/**/*",  // Exclude Pages (not part of package, may be in git history)
+    "src/Utilitys/GoogleDrive/**/*",  // Exclude GoogleDrive (not part of package, may be in git history)
+    "src/Utilitys/Profile/**/*"  // Exclude Profile (not part of package, may be in git history)
+  ]
+}

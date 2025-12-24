@@ -1,0 +1,129 @@
+body {
+    background: #f3f1f2;
+    font-family: sans-serif;
+  }
+  
+  #root {
+    margin: 1rem 4rem;
+  }
+  
+  #root .ql-container {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #fefcfc;
+  }
+  
+  /* Snow Theme */
+  #root .ql-snow.ql-toolbar {
+    display: block;
+    background: #eaecec;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+  }
+  
+  #root .ql-editor {
+    min-height: 18em;
+  }
+  /* #root .ql-compareImage {
+    width: 80px;
+    height: 30px;
+    background-color: red;
+  } */
+  .box-image{
+    position: relative;
+    display: flex;
+    justify-content:space-between;
+    img[alt='pic-1'], img[alt="pic-2"]{
+      margin: 10px 0;
+    }
+    .image-span{
+      position: relative;
+      width: 45%;
+      height: 60px;
+      border: 1px solid rgb(180, 179, 179);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* background-color: rgba(112, 193, 237, 0.552); */
+      background: linear-gradient(to right, rgba(112, 193, 237, 0.552), rgba(193, 112, 237, 0.552));
+      border-radius: 10px;
+      .choose-image-button{
+        background-color: rgb(243, 243, 243);
+        width: fit-content;
+        height: 30px;
+        padding: 8px;
+        border-radius: 8px;
+        color: rgb(6, 6, 6);
+        box-shadow: 0 0 0 2px gainsboro;
+        font-style: normal !important; /* This removes the default italics */
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+  .image-button-2{
+    font-style: normal !important; /* This removes the default italics */
+
+  }
+  .box-image-test{
+    position: relative;
+    display: flex;
+    justify-content:space-between;
+    margin: 10px 15px;
+
+    .image-span{
+      position: relative;
+      width: 45%;
+      height: 60px;
+      border: 1px solid rgb(180, 179, 179);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* background-color: rgba(112, 193, 237, 0.552); */
+      background: linear-gradient(to right, rgba(112, 193, 237, 0.552), rgba(193, 112, 237, 0.552));
+      border-radius: 10px;
+      .choose-image-button{
+        background-color: rgb(243, 243, 243);
+        width: fit-content;
+        height: 30px;
+        padding: 8px;
+        border-radius: 8px;
+        color: rgb(6, 6, 6);
+        box-shadow: 0 0 0 2px gainsboro;
+        font-style: normal !important; /* This removes the default italics */
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .exit-choose-image-button{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid rgb(201, 201, 201);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover{
+      background-color: rgb(201, 201, 201);
+    }
+  }
+  .container-both-image{
+    img[alt='pic-1'], img[alt="pic-2"]{
+      margin: 10px 0;
+    }
+  }
+  .top-and-bottom{
+    position: fixed;
+    /* width: 50px;
+    height: 50px; */
+    /* border-radius: 50%; */
+    /* left: 40px; */
+    .go-top{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+  }

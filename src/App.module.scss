@@ -1,0 +1,16 @@
+// @import "../node_modules/bootstrap/scss/bootstrap";
+.wrap-app{
+    position: relative;
+    width: 100vw; 
+    min-height:100vh; 
+    padding: 0 0;
+    min-width:300px;
+    overflow: hidden;
+}
+.wrap-app-2{
+    position: relative;
+    min-height: 200vh;
+    // height: 100vh;
+    // background-color: rgb(25, 97, 159);
+    // overflow: hidden;
+}

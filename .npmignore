@@ -1,0 +1,53 @@
+# Source files
+src/
+test-server/
+examples/
+
+# Development files
+*.md
+!README.md
+.git/
+.gitignore
+.env
+.env.example
+.env.local
+
+# Build config
+vite.config.ts
+tsconfig.json
+tsconfig.node.json
+tsconfig.app.json
+eslint.config.js
+jsconfig.json
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Only include dist/ in the package
+# dist/ is included by default if not in .npmignore
+
