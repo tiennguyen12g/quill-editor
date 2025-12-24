@@ -23,6 +23,44 @@ yarn add quill-editor-tnbt-v2
 pnpm add quill-editor-tnbt-v2
 ```
 
+### Requirements
+
+- **React**: >=18.0.0 (compatible with React 18, 19, and future versions)
+- **React DOM**: >=18.0.0
+
+The package uses React as a peer dependency, so make sure you have React installed in your project:
+
+```bash
+npm install react react-dom
+```
+
+### ⚠️ React 19 Compatibility Note
+
+If you're using **React 19**, you need to add a polyfill for `findDOMNode` (which was removed in React 19). Add this to your app's entry point **before** other imports:
+
+```tsx
+// main.tsx or App.tsx
+import ReactDOM from 'react-dom';
+
+// Polyfill for React 19
+if (!ReactDOM.findDOMNode) {
+  (ReactDOM as any).findDOMNode = function(componentOrElement: any) {
+    if (!componentOrElement) return null;
+    if (componentOrElement.nodeType === 1 || componentOrElement.nodeType === 3) {
+      return componentOrElement;
+    }
+    if (componentOrElement.current) return componentOrElement.current;
+    if (componentOrElement.stateNode) return componentOrElement.stateNode;
+    return null;
+  };
+}
+
+// Now import your app
+import App from './App';
+```
+
+See [REACT_19_COMPATIBILITY.md](./REACT_19_COMPATIBILITY.md) for detailed instructions.
+
 ## 🚀 Quick Start
 
 ```tsx

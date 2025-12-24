@@ -2,6 +2,23 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { resolve } from 'node:path'
 import dts from 'vite-plugin-dts'
+import { copyFileSync } from 'node:fs'
+
+// Plugin to copy styles.d.ts after build
+const copyStylesDts = () => ({
+  name: 'copy-styles-dts',
+  buildEnd() {
+    try {
+      copyFileSync(
+        resolve(__dirname, 'src/styles.d.ts'),
+        resolve(__dirname, 'dist/styles.d.ts')
+      );
+      console.log('✅ Copied styles.d.ts to dist');
+    } catch (error) {
+      console.warn('⚠️  Could not copy styles.d.ts:', error);
+    }
+  },
+});
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,8 +30,14 @@ export default defineConfig(({ mode }) => {
         dts({
           insertTypesEntry: true,
           include: ['src/**/*'],
-          exclude: ['src/**/*.test.*', 'src/**/*.spec.*'],
+          exclude: [
+            'src/**/*.test.*', 
+            'src/**/*.spec.*',
+            'src/utils/react19-polyfill.ts',  // Exclude polyfill from build
+          ],
+          copyDtsFiles: true,
         }),
+        copyStylesDts(),
       ],
       build: {
         lib: {
@@ -24,7 +47,14 @@ export default defineConfig(({ mode }) => {
           fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
         },
         rollupOptions: {
-          external: ['react', 'react-dom', 'react/jsx-runtime'],
+          external: [
+            'react', 
+            'react-dom', 
+            'react/jsx-runtime',
+            // Also externalize React-related packages that might cause issues
+            /^react\/.*/,
+            /^react-dom\/.*/,
+          ],
           output: {
             globals: {
               react: 'React',

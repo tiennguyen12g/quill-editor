@@ -7,7 +7,7 @@
  */
 
 import React, { useState, useRef } from 'react';
-import { QuillEditorTNBT, QuillEditorRef, QuillEditorTNBT_DefaultCss } from '../index';
+import { type QuillEditorRef, QuillEditorTNBT_DefaultCss } from '../index';
 import { processImagesInContent } from '../utils/imageProcessor';
 
 const API_BASE_URL = 'http://localhost:3001';

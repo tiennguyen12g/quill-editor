@@ -32,6 +32,7 @@
     "src/main.tsx",    // Exclude main entry (not part of package)
     "src/Test.tsx",    // Exclude Test (not part of package)
     "src/examples/**/*",  // Exclude examples (not part of package)
+    "src/utils/react19-polyfill.ts",  // Exclude polyfill (for consumer projects)
     "src/Pages/**/*",  // Exclude Pages (not part of package, may be in git history)
     "src/Utilitys/GoogleDrive/**/*",  // Exclude GoogleDrive (not part of package, may be in git history)
     "src/Utilitys/Profile/**/*"  // Exclude Profile (not part of package, may be in git history)
