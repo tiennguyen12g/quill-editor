@@ -21,6 +21,31 @@
     /* border: 1px solid black !important; */
 }
 
+.emoji-btn {
+    font-size: 16px !important;
+    padding: 4px 6px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    transition: all 0.2s ease !important;
+}
+
+.emoji-btn:hover {
+    background-color: #f0f0f0 !important;
+    border-color: #d0d0d0 !important;
+}
+
+.emoji-btn:active {
+    background-color: #e0e0e0 !important;
+    transform: scale(0.95);
+}
+
 #quill-toolbar{
     /* border-top-left-radius: 10px;
     border-top-right-radius: 10px; */

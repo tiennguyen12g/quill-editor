@@ -55,5 +55,22 @@ export default function ConvertDocProperly({documentValue} : ConvertDocProperlyP
       temperaryContent = updatedContent3;
       // setFileContent(updatedContent3);
     })();
+
+    (function Handle_Image_In_Center_By_Horizontal(){
+      const updatedContent = temperaryContent.replace(
+        /<p>```imageInCenter_Horizontal<\/p>([\s\S]*?)<p>close_imageInCenter_Horizontal```<\/p>/g,
+      '<div class="image-center-horizontal">$1</div>'
+      );
+      temperaryContent = updatedContent;
+    })();
+
+    (function Handle_Blockquote(){
+      const updatedContent = temperaryContent.replace(
+        /<p>```blockquote<\/p>([\s\S]*?)<p>close_blockquote```<\/p>/g,
+      '<div class="custom-blockquote">$1</div>'
+      );
+      temperaryContent = updatedContent;
+    })();
+
     return temperaryContent;
 }

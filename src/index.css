@@ -67,3 +67,107 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* Quill Editor List Styles for Preview Mode */
+.ql-editor ol,
+.ql-editor ul,
+.ql-preview ol,
+.ql-preview ul,
+[class*="ql-"] ol,
+[class*="ql-"] ul {
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  list-style-position: outside !important;
+}
+
+.ql-editor ol li,
+.ql-editor ul li,
+.ql-preview ol li,
+.ql-preview ul li,
+[class*="ql-"] ol li,
+[class*="ql-"] ul li {
+  margin: 0.5em 0 !important;
+  line-height: 1.6 !important;
+  display: list-item !important;
+}
+
+.ql-editor ol {
+  list-style-type: decimal !important;
+}
+
+.ql-editor ul {
+  list-style-type: disc !important;
+}
+
+.ql-preview ol {
+  list-style-type: decimal !important;
+}
+
+.ql-preview ul {
+  list-style-type: disc !important;
+}
+
+/* Ensure list styles are preserved in preview/content areas */
+.article-content ol,
+.article-content ul {
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  list-style-position: outside !important;
+}
+
+.article-content ol li,
+.article-content ul li {
+  margin: 0.5em 0 !important;
+  line-height: 1.6 !important;
+  display: list-item !important;
+}
+
+.article-content ol {
+  list-style-type: decimal !important;
+}
+
+.article-content ul {
+  list-style-type: disc !important;
+}
+
+/* Quill Editor Blockquote Styles for Preview Mode */
+.ql-editor blockquote,
+.ql-preview blockquote,
+[class*="ql-"] blockquote {
+  border-left: 4px solid #d1d5db !important; /* Gray vertical line */
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  color: #374151 !important; /* Gray text */
+  font-style: normal !important;
+  background-color: transparent !important;
+}
+
+.dark .ql-editor blockquote,
+.dark .ql-preview blockquote,
+.dark [class*="ql-"] blockquote {
+  border-left-color: #4b5563 !important; /* Darker gray for dark mode */
+  color: #d1d5db !important; /* Lighter gray text for dark mode */
+}
+
+/* Article content blockquote styles */
+/* .article-content blockquote {
+  border-left: 4px solid #d1d5db !important; 
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  color: #374151 !important; 
+  font-style: normal !important;
+  background-color: transparent !important;
+} */
+blockquote {
+  border-left: 4px solid #d1d5db !important; /* Gray vertical line */
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  color: #374151 !important; /* Gray text */
+  font-style: normal !important;
+  background-color: transparent !important;
+}
+
+.dark .article-content blockquote {
+  border-left-color: #4b5563 !important; /* Darker gray for dark mode */
+  color: #d1d5db !important; /* Lighter gray text for dark mode */
+}

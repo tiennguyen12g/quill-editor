@@ -1,6 +1,6 @@
 {
   "name": "@tnbt/quill-editor",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "A rich text editor component built on Quill that can be integrated into any React application",
   "type": "module",
   "main": "./dist/index.js",

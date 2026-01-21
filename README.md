@@ -1,26 +1,38 @@
-# Quill Editor TNBT v2
+# @tnbt/quill-editor
 
 A powerful, feature-rich rich text editor component built on Quill that can be integrated into any React application. This package provides a flexible, callback-based API that works with any backend (REST, GraphQL, Firebase, MongoDB, etc.).
+
+[![npm version](https://img.shields.io/npm/v/@tnbt/quill-editor.svg)](https://www.npmjs.com/package/@tnbt/quill-editor)
+[![GitHub](https://img.shields.io/github/license/tiennguyen12g/quill-editor)](https://github.com/tiennguyen12g/quill-editor)
 
 ## ✨ Features
 
 - 🎨 **Rich Text Editing**: Full-featured WYSIWYG editor based on Quill
-- 🖼️ **Image Support**: Upload, resize, and manage images with custom callbacks
-- 📝 **Multiple Modes**: Create, edit, and readonly modes
-- 🔄 **Auto-save**: Built-in auto-save functionality
+- 🖼️ **Image Support**: Upload, resize, align (left, right, center), and manage images with custom callbacks
+- 📝 **Multiple Modes**: Create, edit, and readonly modes with preview toggle
+- 🔄 **Auto-save**: Built-in auto-save functionality with configurable intervals
 - 🎯 **TypeScript**: Full TypeScript support with exported types
 - 🔌 **Flexible Backend**: Works with any backend via callback-based architecture
-- 🎨 **Customizable**: Extensive customization options
+- 🎨 **Customizable**: Extensive customization options and styling
 - 📱 **Responsive**: Works on desktop and mobile devices
+- 😊 **Emoji Picker**: Built-in emoji picker with categorized emojis
+- 💬 **Blockquote**: Custom blockquote feature with styled rendering
+- 🎨 **Image Layouts**: Support for image-left-content, image-right-content, and centered image layouts
+- 📋 **Code Blocks**: Syntax highlighting and copy functionality for code blocks
+- ✨ **Highlight Content**: Custom highlight content feature
+- 🔄 **Undo/Redo**: Custom undo/redo functionality
+
+## Image
+https://github.com/tiennguyen12g/my-media-storage/blob/main/quill-tool-tnbt.png
 
 ## 📦 Installation
 
 ```bash
-npm install quill-editor-tnbt-v2
+npm install @tnbt/quill-editor
 # or
-yarn add quill-editor-tnbt-v2
+yarn add @tnbt/quill-editor
 # or
-pnpm add quill-editor-tnbt-v2
+pnpm add @tnbt/quill-editor
 ```
 
 ### Requirements
@@ -59,16 +71,18 @@ if (!ReactDOM.findDOMNode) {
 import App from './App';
 ```
 
-See [REACT_19_COMPATIBILITY.md](./REACT_19_COMPATIBILITY.md) for detailed instructions.
-
 ## 🚀 Quick Start
 
+### Basic Usage
+
 ```tsx
-import React from 'react';
-import { QuillEditorTNBT } from 'quill-editor-tnbt-v2';
-import 'quill-editor-tnbt-v2/dist/style.css';
+import React, { useState } from 'react';
+import { QuillEditorTNBT_DefaultCss } from '@tnbt/quill-editor';
+import '@tnbt/quill-editor/styles'; // Import styles
 
 function MyEditor() {
+  const [content, setContent] = useState('');
+
   const handleCreate = async (data) => {
     // Your save logic - works with ANY backend!
     const response = await fetch('/api/articles', {
@@ -102,24 +116,63 @@ function MyEditor() {
   };
 
   return (
-    <QuillEditorTNBT
+    <QuillEditorTNBT_DefaultCss
+      value={content}
+      onChange={setContent}
       onCreate={handleCreate}
       onImageUpload={handleImageUpload}
       articleMetadata={{
         title: 'My Article',
         tags: ['tech', 'tutorial'],
       }}
+      defaultImageWidth={600}
     />
   );
 }
 ```
 
-## 📚 Basic Usage
+## 📚 Components
+
+### QuillEditorTNBT_DefaultCss
+
+The main editor component with default styling. This is the recommended component to use.
+
+```tsx
+import { QuillEditorTNBT_DefaultCss } from '@tnbt/quill-editor';
+import '@tnbt/quill-editor/styles';
+```
+
+### QuillEditorTNBT
+
+The base editor component without default CSS. Use this if you want to provide your own styling.
+
+```tsx
+import { QuillEditorTNBT } from '@tnbt/quill-editor';
+```
+
+### ConvertDocProperly
+
+Utility component for converting editor content with custom syntax (blockquotes, image layouts, etc.) into proper HTML.
+
+```tsx
+import { ConvertDocProperly } from '@tnbt/quill-editor';
+
+function Preview({ content }) {
+  return (
+    <div dangerouslySetInnerHTML={{ 
+      __html: ConvertDocProperly({ documentValue: content }) 
+    }} />
+  );
+}
+```
+
+## 📖 Usage Examples
 
 ### Create Article
 
 ```tsx
-import { QuillEditorTNBT } from 'quill-editor-tnbt-v2';
+import { QuillEditorTNBT_DefaultCss } from '@tnbt/quill-editor';
+import '@tnbt/quill-editor/styles';
 
 function CreateArticle() {
   const handleCreate = async (data) => {
@@ -138,12 +191,13 @@ function CreateArticle() {
   };
 
   return (
-    <QuillEditorTNBT
+    <QuillEditorTNBT_DefaultCss
       onCreate={handleCreate}
       onImageUpload={async (file) => {
         // Upload image and return URL
         return 'https://example.com/image.jpg';
       }}
+      defaultImageWidth={600}
     />
   );
 }
@@ -152,6 +206,9 @@ function CreateArticle() {
 ### Edit Article
 
 ```tsx
+import { QuillEditorTNBT_DefaultCss } from '@tnbt/quill-editor';
+import '@tnbt/quill-editor/styles';
+
 function EditArticle({ articleId, initialContent }) {
   const handleUpdate = async (data, id) => {
     const response = await fetch(`/api/articles/${id}`, {
@@ -163,7 +220,7 @@ function EditArticle({ articleId, initialContent }) {
   };
 
   return (
-    <QuillEditorTNBT
+    <QuillEditorTNBT_DefaultCss
       mode="edit"
       value={initialContent}
       onUpdate={handleUpdate}
@@ -175,15 +232,61 @@ function EditArticle({ articleId, initialContent }) {
 }
 ```
 
-### Read-Only Mode
+### Read-Only Mode with Preview
 
 ```tsx
+import { QuillEditorTNBT_DefaultCss, ConvertDocProperly } from '@tnbt/quill-editor';
+import '@tnbt/quill-editor/styles';
+
 function ViewArticle({ content }) {
   return (
-    <QuillEditorTNBT
+    <QuillEditorTNBT_DefaultCss
       mode="readonly"
       value={content}
+      showPreview={true}
     />
+  );
+}
+
+// Or render converted content directly
+function ArticlePreview({ content }) {
+  const convertedContent = ConvertDocProperly({ documentValue: content });
+  return <div dangerouslySetInnerHTML={{ __html: convertedContent }} />;
+}
+```
+
+### Using Ref Methods
+
+```tsx
+import { useRef } from 'react';
+import { QuillEditorTNBT_DefaultCss, type QuillEditorRef } from '@tnbt/quill-editor';
+
+function EditorWithRef() {
+  const editorRef = useRef<QuillEditorRef>(null);
+
+  const handleSave = async () => {
+    // Get content
+    const content = editorRef.current?.getContent();
+    const wordCount = editorRef.current?.getWordCount();
+    
+    // Save/Create/Update
+    await editorRef.current?.create();
+    // or
+    await editorRef.current?.update('article-id');
+    // or
+    await editorRef.current?.save();
+    
+    // Utility methods
+    const validation = editorRef.current?.validate();
+    editorRef.current?.focus();
+    editorRef.current?.clear();
+  };
+
+  return (
+    <>
+      <button onClick={handleSave}>Save</button>
+      <QuillEditorTNBT_DefaultCss ref={editorRef} />
+    </>
   );
 }
 ```
@@ -197,10 +300,14 @@ function ViewArticle({ content }) {
 | `value` | `string` | - | Controlled content value |
 | `defaultValue` | `string` | - | Uncontrolled default content |
 | `onChange` | `(html: string) => void` | - | Called on every content change |
+| `onContentChange` | `(html: string) => void` | - | Debounced version of onChange (optional) |
 | `mode` | `'create' \| 'edit' \| 'readonly'` | `'create'` | Editor mode |
+| `showPreview` | `boolean` | `true` | Show preview mode toggle |
+| `showToolbar` | `boolean` | `true` | Show/hide toolbar |
 | `onCreate` | `(data: EditorData) => Promise<CreateResult>` | - | Create article callback |
 | `onUpdate` | `(data: EditorData, id: string) => Promise<UpdateResult>` | - | Update article callback |
-| `onImageUpload` | `(file: File) => Promise<string>` | - | Image upload callback |
+| `onSave` | `(data: EditorData) => Promise<SaveResult>` | - | Generic save callback |
+| `onImageUpload` | `(file: File) => Promise<string>` | - | Image upload callback (must return URL) |
 | `defaultImageWidth` | `number` | `500` | Default width for inserted images |
 | `articleMetadata` | `ArticleMetadata` | - | Article metadata (title, tags, etc.) |
 | `autoSave` | `boolean` | `false` | Enable auto-save |
@@ -209,36 +316,177 @@ function ViewArticle({ content }) {
 | `placeholder` | `string` | `"Write something awesome..."` | Editor placeholder |
 | `onSuccess` | `(message: string) => void` | - | Success callback |
 | `onError` | `(error: EditorError) => void` | - | Error callback |
+| `onModeChange` | `(mode: 'write' \| 'preview') => void` | - | Mode change callback |
+| `className` | `string` | - | Custom CSS class |
 
-### Ref Methods
+### Ref Methods (QuillEditorRef)
 
 ```tsx
-const editorRef = useRef<QuillEditorRef>(null);
+interface QuillEditorRef {
+  // Content Methods
+  getContent: () => string;
+  getPlainText: () => string;
+  setContent: (html: string) => void;
+  clear: () => void;
+  
+  // Editor Methods
+  focus: () => void;
+  blur: () => void;
+  getSelection: () => any;
+  getEditor: () => any; // Get Quill instance
+  
+  // Save Methods
+  save: () => Promise<SaveResult>;
+  create: () => Promise<CreateResult>;
+  update: (articleId: string) => Promise<UpdateResult>;
+  
+  // Preview Methods
+  switchToPreview: () => void;
+  switchToWrite: () => void;
+  
+  // Image Methods
+  insertImage: (url: string, width?: number) => void;
+  extractImages: () => ImageData[];
+  
+  // Utility Methods
+  getWordCount: () => number;
+  getCharacterCount: () => number;
+  validate: () => ValidationResult;
+}
+```
 
-// Get content
-const content = editorRef.current?.getContent();
+### Types
 
-// Save/Create/Update
-await editorRef.current?.create();
-await editorRef.current?.update(articleId);
-await editorRef.current?.save();
+```tsx
+import type {
+  QuillEditorTNBTProps,
+  QuillEditorRef,
+  EditorData,
+  ImageData,
+  ArticleMetadata,
+  SaveResult,
+  CreateResult,
+  UpdateResult,
+  EditorError,
+  ValidationResult,
+  ToolbarConfig,
+} from '@tnbt/quill-editor';
 
-// Utility methods
-const wordCount = editorRef.current?.getWordCount();
-const validation = editorRef.current?.validate();
+interface EditorData {
+  content: string;           // HTML content
+  plainText: string;          // Plain text version
+  images: ImageData[];        // Extracted images info
+  wordCount: number;
+  characterCount: number;
+  metadata?: ArticleMetadata;
+}
+
+interface ImageData {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  file?: File;
+}
+
+interface ArticleMetadata {
+  title?: string;
+  tags?: string[];
+  coverImage?: File | string;
+  category?: string;
+  [key: string]: any;
+}
+```
+
+### Utility Functions
+
+```tsx
+import {
+  processImagesInContent,
+  extractImageUrls,
+  hasBase64Images,
+} from '@tnbt/quill-editor';
+
+// Process images in HTML content (extract base64, upload, replace)
+const processedContent = await processImagesInContent(
+  htmlContent,
+  uploadCallback
+);
+
+// Extract image URLs from HTML
+const imageUrls = extractImageUrls(htmlContent);
+
+// Check if content has base64 images
+const hasBase64 = hasBase64Images(htmlContent);
 ```
 
 ## 🎨 Styling
 
-Import the default styles:
+### Import Default Styles
 
 ```tsx
-import 'quill-editor-tnbt-v2/dist/style.css';
+import '@tnbt/quill-editor/styles';
 ```
 
-Or customize with your own CSS by overriding the classes.
+### Custom CSS (Optional)
 
-## 📖 Examples
+If you need additional styling, you can add custom CSS:
+
+```css
+/* Custom styles for the editor */
+.ql-editor {
+  min-height: 400px;
+}
+
+/* Custom blockquote styles */
+.custom-blockquote {
+  border-left: 4px solid #808080;
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  margin: 10px 0;
+}
+
+/* Custom image layout styles */
+.image-center-horizontal {
+  text-align: center;
+}
+
+.image-left-content {
+  display: flex;
+  gap: 20px;
+}
+```
+
+## 📖 Backend Integration Examples
+
+### With Express.js / MongoDB
+
+```tsx
+const handleCreate = async (data) => {
+  const response = await fetch('/api/articles', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      content: data.content,
+      title: data.metadata?.title,
+      tags: data.metadata?.tags,
+    }),
+  });
+  const result = await response.json();
+  return { success: true, articleId: result.id };
+};
+
+const handleImageUpload = async (file: File) => {
+  const formData = new FormData();
+  formData.append('image', file);
+  const response = await fetch('/api/upload-image', {
+    method: 'POST',
+    body: formData,
+  });
+  const { url } = await response.json();
+  return url;
+};
+```
 
 ### With Firebase
 
@@ -276,18 +524,50 @@ const handleCreate = async (data) => {
 };
 ```
 
-## 🔗 TypeScript
+## 🎯 Features in Detail
+
+### Image Alignment
+
+The editor supports three image alignment options:
+- **Left**: Image on the left, content on the right
+- **Right**: Image on the right, content on the left  
+- **Center**: Image centered horizontally
+
+These are available via toolbar buttons and render properly in preview mode.
+
+### Emoji Picker
+
+Access a categorized emoji picker from the toolbar. Click the emoji button to open a dropdown with emojis organized by category.
+
+### Blockquote
+
+Insert styled blockquotes using the blockquote button. Blockquotes render with a gray vertical line, background color, and proper spacing.
+
+### Code Blocks
+
+Code blocks support syntax highlighting and include a copy button for easy code sharing.
+
+### Highlight Content
+
+Use the highlight feature to emphasize important content with custom styling.
+
+## 🔗 TypeScript Support
 
 Full TypeScript support with exported types:
 
 ```tsx
 import { 
-  QuillEditorTNBT, 
+  QuillEditorTNBT_DefaultCss,
+  QuillEditorTNBT,
+  ConvertDocProperly,
   QuillEditorRef,
   EditorData,
   ImageData,
-  ArticleMetadata 
-} from 'quill-editor-tnbt-v2';
+  ArticleMetadata,
+  processImagesInContent,
+  extractImageUrls,
+  hasBase64Images,
+} from '@tnbt/quill-editor';
 ```
 
 ## 📝 License
@@ -300,7 +580,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📧 Support
 
-For issues and questions, please open an issue on GitHub.
+For issues and questions, please open an issue on [GitHub](https://github.com/tiennguyen12g/quill-editor).
+
+## 🔗 Links
+
+- [GitHub Repository](https://github.com/tiennguyen12g/quill-editor)
+- [npm Package](https://www.npmjs.com/package/@tnbt/quill-editor)
 
 ---
 

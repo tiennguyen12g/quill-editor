@@ -11,7 +11,16 @@ import { Quill, Range } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 // Custom modules
-import { insertHeart, insertStart, HightlightContent, Image_Left_And_Content, Image_Right_And_Content } from "./FeatureButton/SomeEasyFeature.jsx";
+import { 
+  insertHeart, 
+  insertStart, 
+  HightlightContent, 
+  Image_Left_And_Content, 
+  Image_Right_And_Content, 
+  Image_In_Center_By_Horizontal,
+  InsertBlockquote
+} from "./FeatureButton/SomeEasyFeature.jsx";
+import EmojiPicker from "./FeatureButton/EmojiPicker.tsx";
 import { ImageDrop } from "quill-image-drop-module";
 import ImageResize from "./quill-editor-tnbt/ImageResize.js";
 import CompareImage2 from "./quill-editor-tnbt/CompareImage2.js";
@@ -39,10 +48,10 @@ const MainEditorForCreate = React.forwardRef(
     },
     ref
   ) => {
-    const { 
-      documentValue, 
-      setDocumentValue, 
-      switchCount, 
+    const {
+      documentValue,
+      setDocumentValue,
+      switchCount,
       setSwitchCount,
       onImageUpload,
       defaultImageWidth = 500,
@@ -312,24 +321,24 @@ const MainEditorForCreate = React.forwardRef(
     }
     const handleCustomImageDefault = () => {
       // Create a file input element
-      const input = document.createElement('input');
-      input.setAttribute('type', 'file');
-      input.setAttribute('accept', 'image/*');
-      input.style.display = 'none';
-      
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.style.display = "none";
+
       // Handle file selection
       input.onchange = async (e: any) => {
         const file = e.target.files[0];
         if (!file) return;
-        
+
         let imageUrl: string;
-        
+
         // If onImageUpload callback is provided, use it
         if (onImageUpload) {
           try {
             imageUrl = await onImageUpload(file);
           } catch (error: any) {
-            console.error('Image upload failed:', error);
+            console.error("Image upload failed:", error);
             // Fallback to data URL if upload fails
             imageUrl = await new Promise<string>((resolve, reject) => {
               const reader = new FileReader();
@@ -347,33 +356,33 @@ const MainEditorForCreate = React.forwardRef(
             reader.readAsDataURL(file);
           });
         }
-        
+
         if (quillRef.current) {
           const quill = quillRef.current.getEditor();
           const selection = quill.getSelection();
           const position = selection ? selection.index : quill.getLength();
-          
+
           // Insert the image at the current cursor position
-          quill.insertEmbed(position, 'image', imageUrl);
-          
+          quill.insertEmbed(position, "image", imageUrl);
+
           // Set default size after a short delay to ensure image is inserted
           setTimeout(() => {
-            const qlEditor = document.querySelector('.ql-editor');
+            const qlEditor = document.querySelector(".ql-editor");
             if (qlEditor) {
-              const imgElements = qlEditor.querySelectorAll('img');
+              const imgElements = qlEditor.querySelectorAll("img");
               const lastImg = imgElements[imgElements.length - 1] as HTMLImageElement;
-              
+
               if (lastImg) {
                 // Use the provided defaultImageWidth or fallback to 500
                 lastImg.style.width = `${defaultImageWidth}px`;
-                lastImg.style.height = 'auto';
-                lastImg.style.maxWidth = '100%';
+                lastImg.style.height = "auto";
+                lastImg.style.maxWidth = "100%";
               }
             }
           }, 100);
         }
       };
-      
+
       // Trigger file input click
       document.body.appendChild(input);
       input.click();
@@ -525,6 +534,9 @@ const MainEditorForCreate = React.forwardRef(
               <CustomRedo />
             </button>
           </span>
+          <span className="ql-formats" style={{ marginTop: 0 }}>
+            <EmojiPicker quillRef={quillRef} />
+          </span>
           <span className="ql-formats" style={{ marginTop: 4 }}>
             <button className="ql-formula" />
             <button className="ql-code-block" />
@@ -557,6 +569,19 @@ const MainEditorForCreate = React.forwardRef(
               <svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 6v12h9V6zm8 11H2V7h7zm-8 3h22v1H1zM1 3h22v1H1zm11 4h11v1H12zm0 3h11v1H12zm0 3h11v1H12zm0 3h11v1H12z" />
                 <path fill="none" d="M0 0h24v24H0z" />
+              </svg>
+            </button>
+            <button onClick={() => Image_In_Center_By_Horizontal(quillRef)} style={{ marginTop: 4, transform: "rotate(90deg)" }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
+                <rect x="0" fill="none" width="24" height="24" />
+                <g>
+                  <path d="M3 5h18v2H3V5zm0 14h18v-2H3v2zm5-4h8V9H8v6z" />
+                </g>
+              </svg>
+            </button>
+            <button onClick={() => InsertBlockquote(quillRef)} style={{ marginTop: 4 }} title="Insert Blockquote">
+              <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3h3v18H3V3zm15 0h3v18h-3V3z" fill="#808080"/>
               </svg>
             </button>
             <button onClick={() => GoTop()} className="go-top alignBtn">

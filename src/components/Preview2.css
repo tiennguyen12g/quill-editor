@@ -91,3 +91,36 @@
     flex: 1;
     text-align:justify;
 }
+.image-center-horizontal{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-blockquote{
+    width: 100%;
+    display: flex;
+    margin: 15px 0;
+    padding: 0;
+    border-left: 4px solid #808080;
+    background-color: #f9f9f9;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+}
+
+.custom-blockquote p {
+    margin: 8px 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.custom-blockquote p:first-child {
+    margin-top: 0;
+}
+
+.custom-blockquote p:last-child {
+    margin-bottom: 0;
+}

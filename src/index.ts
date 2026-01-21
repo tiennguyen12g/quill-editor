@@ -7,7 +7,8 @@
 
 export { default as QuillEditorTNBT } from './components/QuillEditorTNBT';
 import QuillEditorTNBT_DefaultCss from './components/QuillEditorTNBT_DefaultCss';
-export { QuillEditorTNBT_DefaultCss };
+import ConvertDocProperly from './components/ConvertDocProperly';
+export { QuillEditorTNBT_DefaultCss, ConvertDocProperly };
 // Export types
 export type {
   QuillEditorTNBTProps,
