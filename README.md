@@ -33,6 +33,7 @@ A powerful, feature-rich rich text editor component built on Quill that can be i
   Your browser does not support the video tag. 
   [Watch the video here](https://github.com/tiennguyen12g/my-media-storage/blob/main/videos/quill-editor-tnbt.mp4)
 </video>
+https://github.com/tiennguyen12g/my-media-storage/blob/main/videos/quill-editor-tnbt.mp4
 
 
 ## 📦 Installation
@@ -439,99 +440,112 @@ import '@tnbt/quill-editor/styles';
 ```
 
 ### Custom CSS (Optional)
-
+If the style does not show correctly, you add code below to index.css file.
 If you need additional styling, you can add custom CSS:
 
 ```css
-/* Custom styles for the editor */
-.ql-editor {
-  min-height: 400px;
+/* fix quill-editor-tnbt/styles.css */
+.top-and-bottom{
+  margin-top: 0px !important;
+  top: 100px !important;
+  margin-left: -20px !important;
 }
 
-/* Custom blockquote styles */
-.custom-blockquote {
-  border-left: 4px solid #808080;
-  background-color: #f9f9f9;
-  padding: 10px 15px;
-  margin: 10px 0;
+/* Quill Editor List Styles for Preview Mode */
+.ql-editor ol,
+.ql-editor ul,
+.ql-preview ol,
+.ql-preview ul,
+[class*="ql-"] ol,
+[class*="ql-"] ul {
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  list-style-position: outside !important;
 }
 
-/* Custom image layout styles */
-.image-center-horizontal {
-  text-align: center;
+.ql-editor ol li,
+.ql-editor ul li,
+.ql-preview ol li,
+.ql-preview ul li,
+[class*="ql-"] ol li,
+[class*="ql-"] ul li {
+  margin: 0.5em 0 !important;
+  line-height: 1.6 !important;
+  display: list-item !important;
 }
 
-.image-left-content {
-  display: flex;
-  gap: 20px;
+.ql-editor ol {
+  list-style-type: decimal !important;
 }
-```
 
-## 📖 Backend Integration Examples
+.ql-editor ul {
+  list-style-type: disc !important;
+}
 
-### With Express.js / MongoDB
+.ql-preview ol {
+  list-style-type: decimal !important;
+}
 
-```tsx
-const handleCreate = async (data) => {
-  const response = await fetch('/api/articles', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      content: data.content,
-      title: data.metadata?.title,
-      tags: data.metadata?.tags,
-    }),
-  });
-  const result = await response.json();
-  return { success: true, articleId: result.id };
-};
+.ql-preview ul {
+  list-style-type: disc !important;
+}
 
-const handleImageUpload = async (file: File) => {
-  const formData = new FormData();
-  formData.append('image', file);
-  const response = await fetch('/api/upload-image', {
-    method: 'POST',
-    body: formData,
-  });
-  const { url } = await response.json();
-  return url;
-};
-```
+/* Ensure list styles are preserved in preview/content areas */
+.article-content ol,
+.article-content ul {
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  list-style-position: outside !important;
+}
 
-### With Firebase
+.article-content ol li,
+.article-content ul li {
+  margin: 0.5em 0 !important;
+  line-height: 1.6 !important;
+  display: list-item !important;
+}
 
-```tsx
-import { collection, addDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+.article-content ol {
+  list-style-type: decimal !important;
+}
 
-const handleCreate = async (data) => {
-  const docRef = await addDoc(collection(db, 'articles'), {
-    content: data.content,
-    createdAt: new Date(),
-  });
-  return { success: true, articleId: docRef.id };
-};
+.article-content ul {
+  list-style-type: disc !important;
+}
 
-const handleImageUpload = async (file: File) => {
-  const storageRef = ref(storage, `images/${file.name}`);
-  await uploadBytes(storageRef, file);
-  return await getDownloadURL(storageRef);
-};
-```
+/* Quill Editor Blockquote Styles for Preview Mode */
+.ql-editor blockquote,
+.ql-preview blockquote,
+[class*="ql-"] blockquote {
+  border-left: 4px solid #d1d5db !important; /* Gray vertical line */
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  color: #374151 !important; /* Gray text */
+  font-style: normal !important;
+  background-color: transparent !important;
+}
 
-### With GraphQL
+.dark .ql-editor blockquote,
+.dark .ql-preview blockquote,
+.dark [class*="ql-"] blockquote {
+  border-left-color: #4b5563 !important; /* Darker gray for dark mode */
+  color: #d1d5db !important; /* Lighter gray text for dark mode */
+}
 
-```tsx
-import { useMutation } from '@apollo/client';
+/* Article content blockquote styles */
+blockquote {
+  border-left: 4px solid #d1d5db !important; /* Gray vertical line */
+  padding-left: 1.5em !important;
+  margin: 1em 0 !important;
+  color: #374151 !important; /* Gray text */
+  font-style: normal !important;
+  background-color: transparent !important;
+}
 
-const [createArticle] = useMutation(CREATE_ARTICLE);
-
-const handleCreate = async (data) => {
-  const { data: result } = await createArticle({
-    variables: { content: data.content },
-  });
-  return { success: true, articleId: result.createArticle.id };
-};
+.dark .article-content blockquote {
+  border-left-color: #4b5563 !important; /* Darker gray for dark mode */
+  color: #d1d5db !important; /* Lighter gray text for dark mode */
+}
 ```
 
 ## 🎯 Features in Detail
