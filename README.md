@@ -26,7 +26,14 @@ A powerful, feature-rich rich text editor component built on Quill that can be i
 
 ![Quill Editor TNBT](https://raw.githubusercontent.com/tiennguyen12g/my-media-storage/refs/heads/main/images/quill-tool-tnbt.png)
 
-![Quill Editor TNBT](https://raw.githubusercontent.com/tiennguyen12g/my-media-storage/refs/heads/main/videos/quill-editor-tnbt.mp4)
+## 🎥 Demo Video
+
+<video width="100%" controls>
+  <source src="https://raw.githubusercontent.com/tiennguyen12g/my-media-storage/refs/heads/main/videos/quill-editor-tnbt.mp4" type="video/mp4">
+  Your browser does not support the video tag. 
+  [Watch the video here](https://github.com/tiennguyen12g/my-media-storage/blob/main/videos/quill-editor-tnbt.mp4)
+</video>
+
 ## 📦 Installation
 
 ```bash
