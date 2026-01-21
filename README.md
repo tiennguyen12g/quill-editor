@@ -22,8 +22,9 @@ A powerful, feature-rich rich text editor component built on Quill that can be i
 - ✨ **Highlight Content**: Custom highlight content feature
 - 🔄 **Undo/Redo**: Custom undo/redo functionality
 
-## Image
-https://github.com/tiennguyen12g/my-media-storage/blob/main/quill-tool-tnbt.png
+## 📸 Screenshot
+
+![Quill Editor TNBT](https://raw.githubusercontent.com/tiennguyen12g/my-media-storage/main/quill-tool-tnbt.png)
 
 ## 📦 Installation
 
